@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TypeFree</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>TypeFree</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}" class="btn-register">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-section">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <!-- Debug info -->
+                <!-- User object: {{ user }} -->
+                <!-- User first_name: {{ user.first_name if user else 'No user' }} -->
+                <!-- User last_name: {{ user.last_name if user else 'No user' }} -->
+                <h1>Welcome, {{ user.first_name if user and user.first_name else 'User' }}!</h1>
+                <p>Your touchless typing dashboard</p>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'error' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="dashboard-grid">
+                <!-- Virtual Keyboard Feature -->
+                <div class="dashboard-card feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Virtual Keyboard</h3>
+                    <p class="feature-description">
+                        Experience touchless typing with our advanced virtual keyboard. 
+                        Use hand gestures and motion tracking to type without physical contact.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Words Typed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">0%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary feature-btn" onclick="openVirtualKeyboard()">
+                        Start Virtual Keyboard
+                    </button>
+                </div>
+
+                <!-- Whiteboard Feature -->
+                <div class="dashboard-card feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Whiteboard</h3>
+                    <p class="feature-description">
+                        Create and collaborate on a digital whiteboard using hand gestures. 
+                        Draw, write, and share ideas with touchless interaction.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Sessions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">0</div>
+                            <div class="stat-label">Drawings</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary feature-btn" onclick="openWhiteboard()">
+                        Open Whiteboard
+                    </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <a href="{{ url_for('profile') }}" class="btn-secondary">Edit Profile</a>
+                        <button class="btn-secondary" onclick="viewHistory()">View History</button>
+                        <button class="btn-secondary" onclick="exportData()">Export Data</button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">📝</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Welcome to TypeFree!</div>
+                                <div class="activity-time">Just now</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">🎯</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Ready to start touchless typing</div>
+                                <div class="activity-time">Account created</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Feature Modals -->
+    <div id="virtualKeyboardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Virtual Keyboard</h2>
+                <span class="close" onclick="closeModal('virtualKeyboardModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="keyboard-preview">
+                    <div class="keyboard-row">
+                        <div class="key">Q</div>
+                        <div class="key">W</div>
+                        <div class="key">E</div>
+                        <div class="key">R</div>
+                        <div class="key">T</div>
+                        <div class="key">Y</div>
+                        <div class="key">U</div>
+                        <div class="key">I</div>
+                        <div class="key">O</div>
+                        <div class="key">P</div>
+                    </div>
+                    <div class="keyboard-row">
+                        <div class="key">A</div>
+                        <div class="key">S</div>
+                        <div class="key">D</div>
+                        <div class="key">F</div>
+                        <div class="key">G</div>
+                        <div class="key">H</div>
+                        <div class="key">J</div>
+                        <div class="key">K</div>
+                        <div class="key">L</div>
+                    </div>
+                    <div class="keyboard-row">
+                        <div class="key wide">Shift</div>
+                        <div class="key">Z</div>
+                        <div class="key">X</div>
+                        <div class="key">C</div>
+                        <div class="key">V</div>
+                        <div class="key">B</div>
+                        <div class="key">N</div>
+                        <div class="key">M</div>
+                        <div class="key wide">Backspace</div>
+                    </div>
+                </div>
+                <p class="modal-description">
+                    Use your hand gestures to interact with the virtual keyboard. 
+                    Point your finger to select keys and make a fist to click.
+                </p>
+                <form method="post" action="{{ url_for('launch_keyboard') }}">
+                    <button type="submit" class="btn-primary">Launch Virtual Keyboard</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="whiteboardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Whiteboard</h2>
+                <span class="close" onclick="closeModal('whiteboardModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="whiteboard-preview">
+                    <div class="canvas-placeholder">
+                        <div class="drawing-tools">
+                            <div class="tool">✏️</div>
+                            <div class="tool">🖌️</div>
+                            <div class="tool">🧽</div>
+                            <div class="tool">📝</div>
+                        </div>
+                        <div class="canvas-area">
+                            <p>Your drawing canvas will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="modal-description">
+                    Draw, write, and collaborate on a digital whiteboard using hand gestures. 
+                    Perfect for presentations and brainstorming sessions.
+                </p>
+                <form method="post" action="{{ url_for('launch_whiteboard') }}">
+                    <button type="submit" class="btn-primary">Open Whiteboard</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Feature functions
+        function openVirtualKeyboard() {
+            document.getElementById('virtualKeyboardModal').style.display = 'block';
+        }
+        
+        function openWhiteboard() {
+            document.getElementById('whiteboardModal').style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function startVirtualKeyboard() {
+            alert('Virtual Keyboard feature coming soon! This will open a full-screen virtual keyboard with hand gesture recognition.');
+            closeModal('virtualKeyboardModal');
+        }
+        
+        function startWhiteboard() {
+            alert('Whiteboard feature coming soon! This will open a collaborative digital whiteboard with hand gesture drawing.');
+            closeModal('whiteboardModal');
+        }
+        
+        function viewHistory() {
+            alert('History feature coming soon!');
+        }
+        
+        function exportData() {
+            alert('Export feature coming soon!');
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - TypeFree</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>TypeFree</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('features') }}" class="active">Features</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('learn') }}">Learn More</a>
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('logout') }}" class="btn-register">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}" class="btn-register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="features-section">
+        <!-- Hero Section -->
+        <div class="features-hero">
+            <div class="features-hero-content">
+                <h1>Powerful Features for Touchless Interaction</h1>
+                <p>Discover how TypeFree revolutionizes the way you interact with technology</p>
+            </div>
+        </div>
+
+        <!-- Main Features Grid -->
+        <div class="features-container">
+            <!-- Virtual Keyboard Feature -->
+            <div class="feature-card-large">
+                <div class="feature-header">
+                    <div class="feature-icon-large">⌨️</div>
+                    <h2>Virtual Keyboard</h2>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-description">
+                        <h3>Touchless Typing Revolution</h3>
+                        <p>Experience the future of typing with our advanced virtual keyboard that responds to your hand gestures and finger movements. No physical contact required - just point, gesture, and type naturally.</p>
+                        
+                        <div class="feature-benefits">
+                            <h4>Key Benefits:</h4>
+                            <ul>
+                                <li>🎯 <strong>High Accuracy:</strong> 99.2% recognition rate for precise typing</li>
+                                <li>⚡ <strong>Real-time Response:</strong> Instant feedback with minimal latency</li>
+                                
+                                
+                                <li>🎨 <strong>Visual Feedback:</strong> Clear visual indicators for key selection</li>
+                            </ul>
+                        </div>
+
+                        
+
+                        <div class="feature-use-cases">
+                            <h4>Perfect For:</h4>
+                            <div class="use-case-grid">
+                                <div class="use-case">🏥 Healthcare professionals in sterile environments</div>
+                                <div class="use-case">👨‍💼 Presenters during live demonstrations</div>
+                                <div class="use-case">♿ Users with accessibility needs</div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-demo">
+                        <div class="demo-placeholder">
+                            <div class="keyboard-demo">
+                                <div class="keyboard-row">
+                                    <div class="key">Q</div>
+                                    <div class="key">W</div>
+                                    <div class="key">E</div>
+                                    <div class="key">R</div>
+                                    <div class="key">T</div>
+                                </div>
+                                <div class="keyboard-row">
+                                    <div class="key">A</div>
+                                    <div class="key">S</div>
+                                    <div class="key">D</div>
+                                    <div class="key">F</div>
+                                    <div class="key">G</div>
+                                </div>
+                                <div class="keyboard-row">
+                                    <div class="key wide">Space</div>
+                                </div>
+                            </div>
+                            <p class="demo-text">Interactive Demo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Whiteboard Feature -->
+            <div class="feature-card-large">
+                <div class="feature-header">
+                    <div class="feature-icon-large">🖼️</div>
+                    <h2>Digital Whiteboard</h2>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-description">
+                        <h3>Collaborative Drawing & Writing</h3>
+                        <p>Transform any space into an interactive digital canvas. Draw, write, and collaborate using natural hand gestures. Perfect for presentations, brainstorming sessions, and creative collaboration.</p>
+                        
+                        <div class="feature-benefits">
+                            <h4>Key Benefits:</h4>
+                            <ul>
+                                <li>🤝 <strong>Real-time Collaboration:</strong> Multiple users can draw simultaneously</li>
+                                <li>🎨 <strong>Rich Tools:</strong> Pens, brushes, shapes, and text tools</li>
+                                <li>💾 <strong>Save & Share:</strong> Export drawings in multiple formats</li>
+                                <li>🔄 <strong>Undo/Redo:</strong> Full history control for your creations</li>
+                                <li>📱 <strong>Cross-platform:</strong> Works on any device with a camera</li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-use-cases">
+                            <h4>Perfect For:</h4>
+                            <div class="use-case-grid">
+                                <div class="use-case">👨‍🏫 Teachers in virtual classrooms</div>
+                                <div class="use-case">💼 Business meetings and presentations</div>
+                                <div class="use-case">🎨 Creative brainstorming sessions</div>
+                                <div class="use-case">🏥 Medical consultations and explanations</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-demo">
+                        <div class="demo-placeholder">
+                            <div class="whiteboard-demo">
+                                <div class="drawing-tools-demo">
+                                    <div class="tool">✏️</div>
+                                    <div class="tool">🖌️</div>
+                                    <div class="tool">🔴</div>
+                                    <div class="tool">🔵</div>
+                                </div>
+                                <div class="canvas-demo">
+                                    <div class="drawing-line"></div>
+                                    <div class="drawing-circle"></div>
+                                </div>
+                            </div>
+                            <p class="demo-text">Interactive Canvas</p>
+                            <form method="post" action="{{ url_for('launch_whiteboard') }}" style="margin-top:12px;">
+                                <button type="submit" class="btn-register">Launch Whiteboard</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

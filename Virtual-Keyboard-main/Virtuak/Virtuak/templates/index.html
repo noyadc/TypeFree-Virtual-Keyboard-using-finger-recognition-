@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeFree - Touchless Typing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>TypeFree</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="active">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('features') }}">Features</a>
+                <a href="{{ url_for('learn') }}">Learn More</a>
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="btn-login">Dashboard</a>
+                    <a href="{{ url_for('logout') }}" class="btn-register">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn-login">Login</a>
+                    <a href="{{ url_for('register') }}" class="btn-register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero-section-full">
+        <div class="hero-content-full">
+            <h1>Join us now</h1>
+            <p>to enjoy touchless typing powered by real-time hand tracking. Because your hands deserve more freedom.</p>
+            <div class="hero-buttons">
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="btn-primary">Go to Dashboard</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="btn-primary">Get Started</a>
+                {% endif %}
+                <a href="{{ url_for('learn') }}" class="btn-secondary">Learn More</a>
+                <a href="{{ url_for('features') }}" class="btn-secondary">View Features</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

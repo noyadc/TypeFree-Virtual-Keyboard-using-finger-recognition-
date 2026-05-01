@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - TypeFree</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>TypeFree</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}" class="btn-register">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="profile-section">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1>Profile Settings</h1>
+                <p>Manage your account information</p>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'error' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="profile-grid">
+                <!-- Profile Information -->
+                <div class="profile-card">
+                    <h3>Profile Information</h3>
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Update Profile</button>
+                    </form>
+                </div>
+
+                <!-- Change Password -->
+                <div class="profile-card">
+                    <h3>Change Password</h3>
+                    <form id="passwordForm" class="profile-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Change Password</button>
+                    </form>
+                </div>
+
+                <!-- Account Information -->
+                <div class="profile-card">
+                    <h3>Account Information</h3>
+                    <div class="info-item">
+                        <strong>Member since:</strong> {{ user.created_at.strftime('%B %d, %Y') }}
+                    </div>
+                    {% if user.last_login %}
+                    <div class="info-item">
+                        <strong>Last login:</strong> {{ user.last_login.strftime('%B %d, %Y at %I:%M %p') }}
+                    </div>
+                    {% endif %}
+                    <div class="info-item">
+                        <strong>Account status:</strong> 
+                        <span class="status-active">Active</span>
+                    </div>
+                </div>
+
+                <!-- Whiteboard Gallery -->
+                <div class="profile-card whiteboard-gallery">
+                    <h3>My Whiteboard Drawings</h3>
+                    {% if whiteboard_images %}
+                    <div class="gallery-grid">
+                        {% for image in whiteboard_images %}
+                        <div class="gallery-item">
+                            <img src="{{ image.path }}" alt="Whiteboard drawing" loading="lazy">
+                            <div class="gallery-item-info">
+                                <span class="gallery-date">{{ image.date }}</span>
+                                <a href="{{ image.path }}" class="btn-secondary" target="_blank">View Full Size</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>No whiteboard drawings yet. Use the whiteboard feature to create some!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Profile form submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/update_profile', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert('An error occurred. Please try again.');
+            });
+        });
+
+        // Password form submission
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/change_password', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    this.reset();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

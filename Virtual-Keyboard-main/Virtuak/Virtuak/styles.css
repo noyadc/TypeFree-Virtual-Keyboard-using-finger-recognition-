@@ -1,0 +1,612 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    background: linear-gradient(180deg, #2d1810 0%, #5d4037 50%, #a1887f 100%);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Split Layout */
+.split-layout {
+    min-height: 100vh;
+}
+
+.split-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left Section - Hero */
+.hero-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 500px;
+    width: 100%;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.logo-lines {
+    display: flex;
+    gap: 2px;
+}
+
+.line {
+    width: 3px;
+    height: 20px;
+    background: #1a1a1a;
+    border-radius: 2px;
+    transform: rotate(-5deg);
+}
+
+.line:nth-child(2) {
+    transform: rotate(0deg);
+}
+
+.line:nth-child(3) {
+    transform: rotate(5deg);
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.hero-text h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    color: #ffffff;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.navigation-dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #ffffff;
+}
+
+/* Right Section - Form */
+.form-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form-container {
+    max-width: 450px;
+    width: 100%;
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-subtitle {
+    font-size: 0.8rem;
+    color: #666666;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.form-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333333;
+}
+
+/* Form Styles */
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #ffffff;
+    border-color: #5d4037;
+    color: #5d4037;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #5d4037;
+    box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #999999;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: #5d4037;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #8d6e63;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #d4af37;
+}
+
+.btn-login, .btn-register {
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    border: 2px solid #ffffff;
+}
+
+.btn-login:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+.btn-register {
+    background: #d4af37;
+    color: #000000;
+}
+
+.btn-register:hover {
+    background: #b8941f;
+    transform: translateY(-2px);
+}
+
+/* Hero Section (for index.html) */
+.hero-section-full {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.hero-content-full {
+    max-width: 800px;
+}
+
+.hero-content-full h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.hero-content-full p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #d4af37;
+    color: #000000;
+}
+
+.btn-primary:hover {
+    background: #b8941f;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: translateY(-3px);
+}
+
+/* Auth Pages (Legacy styles for backward compatibility) */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #333333;
+}
+
+.auth-header p {
+    color: #666666;
+    font-size: 0.95rem;
+}
+
+/* Form Styles (Legacy) */
+.auth-form-legacy {
+    margin-bottom: 2rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333333;
+    font-size: 0.9rem;
+}
+
+/* Checkbox Styles */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: #d4af37;
+    border-color: #d4af37;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.forgot-link {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+    color: #b8941f;
+}
+
+/* Auth Footer */
+.auth-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.auth-footer p {
+    margin-bottom: 1rem;
+    color: #666666;
+}
+
+.auth-footer a {
+    color: #d4af37;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: #b8941f;
+}
+
+.back-home {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #999999 !important;
+    font-size: 0.9rem;
+}
+
+.back-home:hover {
+    color: #666666 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+    
+    .hero-section {
+        padding: 2rem 1rem;
+        min-height: 50vh;
+    }
+    
+    .form-section {
+        padding: 2rem 1rem;
+        min-height: 50vh;
+    }
+    
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-text p {
+        font-size: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .hero-content-full h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content-full p {
+        font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .auth-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .hero-section-full {
+        padding: 0 1rem;
+    }
+    
+    .hero-content-full h1 {
+        font-size: 2rem;
+    }
+    
+    .auth-page {
+        padding: 1rem;
+    }
+    
+    .auth-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .brand-name {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animation for form inputs */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #5d4037;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b8941f;
+}
